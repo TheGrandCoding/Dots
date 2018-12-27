@@ -4,9 +4,12 @@ Population test;
 PVector goal;
 public static int startPosX;
 public static int startPosY;
-int stage = 1; // 1 is deciding where the goal is AND the text screen; 2 or higher is the actual program.
+int stage = 1; // 1 is deciding where the goal is AND the text screen, 
+               // 2 is picking where the dots start, 
+               // 3 is drawing the obstacles, 
+               // anything higher is the actual program.
 boolean mouseIsDown = false;
-public static List<int[]> obstacles = new ArrayList<int[]>();
+public static List<int[]> obstacles = new ArrayList<int[]>(); //in the form [[x,y], [x,y], [x,y], [x,y]]
 
 void setup(){
   size(800, 800); //sets the window's size
@@ -16,8 +19,8 @@ void draw(){ //called every frame
   
   background(255); //white background
   
-  stroke(0);
-  strokeWeight(0);
+  stroke(0); //black outline
+  strokeWeight(0); //thin
   
   if (stage == 1){ //the initial text screen
     fill(255, 0, 0); //red colour
@@ -42,18 +45,18 @@ void draw(){ //called every frame
     text("(but please don't draw too much)", 20, 100);
     text("(and draw slowly)", 20, 130);
     
-    fill(0);
+    fill(0); //black
     rect(650, 700, 100, 50); //confirm button
     ellipse(startPosX, startPosY, 4, 4); //a little dot showing where the population starts
     
-    drawObstacles();
+    drawObstacles(); //just connects all the points in the obstacles[] list
     
     stroke(0, 0, 255); //blue
     strokeWeight(10); //thick
     
     if (mouseIsDown){
-      line(mouseX, mouseY, pmouseX, pmouseY);
-      obstacles.add(new int[] {pmouseX, pmouseY});
+      line(mouseX, mouseY, pmouseX, pmouseY); //draw the line
+      obstacles.add(new int[] {pmouseX, pmouseY}); //add the points to the obstacles list
       obstacles.add(new int[] {mouseX, mouseY});
     }
   
@@ -62,7 +65,7 @@ void draw(){ //called every frame
   
       fill(255, 0, 0); //red colour
       strokeWeight(0); //thin
-      stroke(0); //black
+      stroke(0); //black outline
       ellipse(goal.x, goal.y, 10, 10); //draw a circle where the goal is
     
     if(test.allDotsDead()){
@@ -88,7 +91,7 @@ void mouseClicked(){
     goal = new PVector(mouseX, mouseY);
     
   } else if (stage == 2){ //deciding where the dots start from
-    startPosX = mouseX; //it goes crazy when trying to put them into a PVector
+    startPosX = mouseX; //it goes crazy when trying to put them into a PVector straight away
     startPosY = mouseY;
     test = new Population(1000); //!!!!! Try changing the population size !!!!!\\
     
@@ -107,7 +110,7 @@ void mouseReleased(){
 void drawObstacles(){ //draw all of the previous points
     stroke(0, 0, 255);
     strokeWeight(10);
-    for (int i = 0; i < obstacles.size(); i += 2){
+    for (int i = 0; i < obstacles.size(); i += 2){ //joining all the stored points together
       line(obstacles.get(i)[0], obstacles.get(i)[1], obstacles.get(i + 1)[0], obstacles.get(i + 1)[1]); 
     }
 }
