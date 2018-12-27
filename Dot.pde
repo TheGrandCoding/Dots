@@ -56,9 +56,14 @@ class Dot{
       } else if(dist(pos.x, pos.y, goal.x, goal.y) < 5){
         //if the dot reached the goal
         reachedGoal = true;
+      } else {
+        for (int[] boundary : Dots.obstacles){
+          if (dist(pos.x, pos.y, boundary[0], boundary[1]) < 5){
+            dead = true; //kill the dot if it is within an obstacle
+          }
+        }
       }
     }
-    
   }
   
   //----------------------------

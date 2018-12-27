@@ -2,14 +2,13 @@ Welcome
 
 notes
 ------------------------------------
--haven't got a good name for this program so I named it DotAndBrain
--This was made mostly from a tutorial
+-This was made mostly from a tutorial (:
 
 
 opening the files
 ------------------------------------
 Highly recommend you download Processing to see the code
-(it's java but with sketches and its very good)
+(it's java but with sketches and it's very good)
 https://processing.org/download/
 
 or use the .exe; it's in the application.windows64 (or 32) folder
